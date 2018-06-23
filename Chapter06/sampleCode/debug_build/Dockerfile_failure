@@ -1,0 +1,6 @@
+FROM ubuntu:16.04
+
+EXPOSE 80
+RUN apt-get install -y nginx
+
+CMD ["nginx", "-g", "daemon=off;"]

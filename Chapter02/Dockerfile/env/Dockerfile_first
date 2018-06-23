@@ -1,0 +1,7 @@
+FROM ubuntu
+
+ENV myName John Doe
+ENV myDog Rex The Dog
+ENV myCat fluffy
+
+RUN echo "$myName, $myDog, $myCat"

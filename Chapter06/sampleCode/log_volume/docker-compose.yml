@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.6.35
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=sampleUser
+      - MYSQL_PASSWORD=samplePass
+      - MYSQL_DATABASE=sampleDb
+      - MYSQL_ROOT_PASSWORD=rootpass
+    command: --general-log=true --general-log-file=/var/log/mysql/query.log
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./query.log:/var/log/mysql/query.log
+
+volumes:
+  db-data:

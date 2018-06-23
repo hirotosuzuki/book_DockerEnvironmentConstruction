@@ -1,0 +1,5 @@
+FROM ubuntu:16.04
+WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd

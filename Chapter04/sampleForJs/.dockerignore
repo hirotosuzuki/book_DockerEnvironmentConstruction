@@ -1,0 +1,6 @@
+# For docker
+Dockerfile
+docker-compose.yml*
+
+# For node.js
+node_modules

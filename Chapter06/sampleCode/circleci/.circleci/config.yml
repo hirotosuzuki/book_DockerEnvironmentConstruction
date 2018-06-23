@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  build:
+    working_directory: /nginx
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+#      - setup_remote_docker:
+#          docker_layer_caching: true
+      - run:
+          name: Build docker image
+          command: |
+            docker build -t nginx .
+      - deploy:
+          name: Push docker image to DockerHub
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              DATE_LABEL="$(date '+%Y%m%d%H%M')-$(echo $CIRCLE_SHA1 | cut -c -6)"
+              IMAGE_NAME="sampledocker1234/ci_sample:${DATE_LABEL}"
+              docker tag nginx ${IMAGE_NAME}
+              docker login -u $DOCKERHUB_ID -p $DOCKERHUB_PASS
+              docker push ${IMAGE_NAME}
+            fi

@@ -1,0 +1,5 @@
+FROM ubuntu
+
+RUN echo ${HOGE:-hoge}
+ARG HOGE
+RUN echo $HOGE

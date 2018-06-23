@@ -1,0 +1,7 @@
+FROM ubuntu
+
+ARG myName=John\ Doe
+ARG myDog
+ARG myCat=fluffy
+
+RUN echo "$myName, $myDog, $myCat"

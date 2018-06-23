@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# 必要なディレクトリを作成する
+install -d -o mysql /var/run/mysqld/
+
+# サービスを停止しようとした場合にmysqldがうまくシャットダウンできないので、
+# mysqld_safeはバックグラウンドで実行しつつ、その終了を待つようにしている。
+# スクリプトを終了しようとした時点でmysqladminのshutdownコマンドを送るようにしている。
+#
+# see http://smarden.org/runit1/runscripts.html#mysql
+
+cd /
+umask 077
+
+MYSQLADMIN='/usr/bin/mysqladmin --defaults-extra-file=/etc/mysql/debian.cnf'
+
+trap "$MYSQLADMIN shutdown" 0
+trap 'exit 2' 1 2 3 15
+
+/usr/bin/mysqld_safe & wait

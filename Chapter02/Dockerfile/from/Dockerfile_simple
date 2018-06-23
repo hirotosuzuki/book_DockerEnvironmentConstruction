@@ -1,0 +1,4 @@
+FROM ubuntu
+
+RUN echo foo
+RUN echo bar
